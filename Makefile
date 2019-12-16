@@ -182,3 +182,6 @@ test-docs: build-docs
 serve-docs: build-docs
 	@echo Stating docs website on http://localhost:${DOCS_PORT}/_build/html/index.html
 	@docker run -i -p ${DOCS_PORT}:8000 -e USER_ID=$$UID flux-docs
+
+build/image/multiarch:
+	docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t timwebster9/flux:latest-multiarch -f docker/Dockerfile.build . --push
